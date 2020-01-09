@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
-using StreamMicroservices.AspNetCore.Extensions;
 
 namespace StreamMicroservices.Identity
 {
@@ -24,7 +18,10 @@ namespace StreamMicroservices.Identity
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrelForHttp2(5001);
+                    webBuilder.ConfigureKestrel((host, options) =>
+                    {
+                        options.ListenLocalhost(5001, listenOptions => listenOptions.Protocols = HttpProtocols.Http2);
+                    });
                 });
     }
 }

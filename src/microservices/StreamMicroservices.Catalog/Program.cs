@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
-using StreamMicroservices.AspNetCore.Extensions;
 
 namespace StreamMicroservices.Catalog
 {
@@ -26,7 +20,7 @@ namespace StreamMicroservices.Catalog
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureKestrel((host, options) =>
                     {
-                        options.ListenLocalhost(5000, listenOptions => listenOptions.Protocols = HttpProtocols.Http2);
+                        options.ListenLocalhost(5002, listenOptions => listenOptions.Protocols = HttpProtocols.Http2);
                     });
                 });
     }
